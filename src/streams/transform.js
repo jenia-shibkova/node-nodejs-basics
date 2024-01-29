@@ -1,5 +1,17 @@
+import { stdin, stdout } from 'process';
+import { Transform } from 'stream';
+
 const transform = async () => {
-    // Write your code here 
+  const result = new Transform({
+    transform(chunk, _, callBack) {
+      callBack(null, chunk
+        .toString()
+        .split('')
+        .reverse()
+        .join(''))
+    }
+  });
+  stdin.pipe(result).pipe(stdout);
 };
 
 await transform();
